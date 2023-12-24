@@ -22,14 +22,13 @@
             background-color: #0d0e3e;
             color: #1e1f4d;
             padding-bottom: 20px;
-            height: 100vh;
         }
 
-        #changeButton{
+        #changeButton {
             margin-top: 10px;
         }
 
-        input{
+        input {
             margin: 10px;
         }
 
@@ -48,16 +47,21 @@
             color: #FFF;
         }
 
+        @media screen and ( max-width : 992px) {
+            #container {
+                height: 100vh;
+            }
+        }
 
-        @media screen and ( max-width : 768px ) {
-            #container p{
+        @media screen and (max-width: 768px) {
+            #container p {
                 font-size: .65em;
             }
 
             #textForm {
                 position: fixed;
-                bottom: 20px;  
-                top: auto; 
+                bottom: 20px;
+                top: auto;
                 left: auto;
             }
         }
@@ -85,7 +89,7 @@
             const container = document.getElementById('container');
             container.innerHTML = "";
 
-            repetitionCount = Math.floor(window.innerHeight) / 17;
+            repetitionCount = Math.floor(window.innerWidth / 17);
 
             for (let i = -1; i < repetitionCount; i++) {
                 const newLine = document.createElement('p');
@@ -105,6 +109,8 @@
             document.getElementById('container').innerHTML = "";
             updateTree();
         }
+
+        window.addEventListener('resize', updateTree);
     </script>
 </body>
 
