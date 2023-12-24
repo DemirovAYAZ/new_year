@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Iliniz Mübarək, Vahid müəllim! 😁</title>
+
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            display: flex;
+            overflow: hidden;
+            overflow-y: scroll;
+            justify-content: center;
+            position: relative;
+        }
+
+        #container {
+            font-weight: bold;
+            background-color: #0d0e3e;
+            color: #1e1f4d;
+            padding-bottom: 20px;
+            height: 100vh;
+        }
+
+        #changeButton{
+            margin-top: 10px;
+        }
+
+        input{
+            margin: 10px;
+        }
+
+        #container p {
+            line-height: 0;
+            letter-spacing: 2px;
+        }
+
+        #textForm {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #010032;
+            padding: 10px;
+            border-radius: 10px;
+            color: #FFF;
+        }
+
+
+        @media screen and ( max-width : 768px ) {
+            #container p{
+                font-size: .65em;
+            }
+
+            #textForm {
+                position: fixed;
+                bottom: 20px;  
+                top: auto; 
+                left: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <form id="textForm">
+        <label for="newTxt">New Text:</label>
+        <input type="text" id="newText" name="newText" placeholder="Enter new text">
+        <br>
+        <label for="hlColor">Highlight Color:</label>
+        <input type="color" id="hlColor" name="hlColor" value="#F9F9FF">
+        <br>
+        <button id="changeButton" type="button" onclick="updateText()">Change Text</button>
+    </form>
+    <script>
+        let repetitionCount;
+        let text = 'YENIIL';
+
+        document.addEventListener('DOMContentLoaded', () => updateTree());
+
+        function updateTree() {
+            const container = document.getElementById('container');
+            container.innerHTML = "";
+
+            repetitionCount = Math.floor(window.innerHeight) / 17;
+
+            for (let i = -1; i < repetitionCount; i++) {
+                const newLine = document.createElement('p');
+                const lineText = text.repeat(Math.floor(window.innerWidth / text.length));
+                const startIdx = Math.floor((lineText.length) / 2) - i;
+                const endIdx = Math.floor((lineText.length) / 2) + i + 2;
+                const coloredText = lineText.substring(0, startIdx) + '<span style="color: ' + document.getElementById('hlColor').value + ';">' + lineText.substring(startIdx, endIdx) + '</span>' + lineText.substring(endIdx);
+                newLine.innerHTML = coloredText;
+                container.appendChild(newLine);
+            }
+        }
+
+        function updateText() {
+            const newText = document.getElementById('newText').value.replace(/\s/g, '');
+            text = newText.length !== 0 ? newText : 'YENIIL';
+
+            document.getElementById('container').innerHTML = "";
+            updateTree();
+        }
+    </script>
+</body>
+
+</html>
